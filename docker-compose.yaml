@@ -12,10 +12,22 @@ services:
     tty: true
     networks:
       - node-network
-    ports:
-      - "3000:3000"
     depends_on:
       - db
+
+  nginx:
+    image: edukandalski/nginx
+    build:
+      context: nginx
+    container_name: nginx
+    entrypoint: dockerize -wait tcp://app:3000 -timeout 20s /docker-entrypoint.sh nginx -g "daemon off;"
+    tty: true
+    networks:
+      - node-network
+    depends_on:
+      - app
+    ports:
+      - 8080:80
 
   db:
     image: mysql:5.7
