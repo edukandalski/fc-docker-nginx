@@ -22,3 +22,5 @@ E depois para finalizar, basta executar:
 ```sh
 docker-compose down
 ```
+
+teste de GPG
